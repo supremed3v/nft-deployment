@@ -52,6 +52,29 @@ function Form() {
         getUseNftStatus(address);
         alert(response?.data?.message);
       })
+      .then(() => {
+        axios
+          .post(
+            "https://sheet.best/api/sheets/383f2606-ef4f-48ad-9bbd-d6a9b91fe2d2",
+            {
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              address: address,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((response) => {
+            console.log("response from google sheet", response);
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
+      })
       .catch((error) => {
         alert("Server: Something went wrong!!!");
         console.error("Error making API request:", error.message);
